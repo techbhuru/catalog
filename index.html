@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <script>
+        async function loadCatalog() {
+            const response = await fetch('products-config.json');
+            const products = await response.json();
+            const catalogContainer = document.getElementById('catalog');
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <img src="${product.image}" alt="${product.name} Image">
+                    <p>${product.description}</p>
+                `;
+                catalogContainer.appendChild(productDiv);
+            });
+        }
+
+        window.onload = loadCatalog;
+    </script>
+</head>
+<body>
+    <h1>Product Catalog</h1>
+    <div id="catalog"></div>
+</body>
+</html>
